@@ -72,10 +72,13 @@ export default function Home() {
       {prediction && (
         <>
           {prediction.output && (
-            <div className="image-wrapper mt-5">
+            <div>
+              {/* Log the output to the console */}
+              {console.log('Prediction output:', prediction.output)}
+
               <Image
                 fill
-                src={prediction.output[prediction.output.length - 1]}
+                src={prediction.output} //URL
                 alt="output"
                 sizes="100vw"
               />

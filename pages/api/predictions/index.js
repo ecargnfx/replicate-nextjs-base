@@ -11,13 +11,16 @@ export default async function handler(req, res) {
     );
   }
 
-  const prediction = await replicate.predictions.create({
-    // Pinned to a specific version of Stable Diffusion
-    // See https://replicate.com/stability-ai/sdxl
-    version: "8beff3369e81422112d93b89ca01426147de542cd4684c244b673b105188fe5f",
+  // Use the version ID for the sdxl-panoramic model
+  const versionId = "76acc4075d0633dcb3823c1fed0419de21d42001b65c816c7b5b9beff30ec8cd";
 
-    // This is the text prompt that will be submitted by a form on the frontend
-    input: { prompt: req.body.prompt },
+  const prediction = await replicate.predictions.create({
+    version: versionId,
+    input: {
+      prompt: req.body.prompt,
+      // Add any other required input parameters for the new model here
+    },
+    // webhook here
   });
 
   if (prediction?.error) {
